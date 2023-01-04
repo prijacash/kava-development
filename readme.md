@@ -27,7 +27,9 @@ To see full details: [Click Here](https://docs.kava.io/docs/ethereum/metamask)
 # Development Tutorial (Kava Local)
 Kava provides tools for easily setting up a local Kava development environment for Solidity smart contract deployment and interaction.
 
-## kvtool
+### kvtool
+
 kvtool enables developers to spin up a local Kava development environment. A dockerized local testnet with ethermint EVM can be created with:
+
 ``` kvtool testnet bootstrap --kava.configTemplate master ```
 
