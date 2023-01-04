@@ -134,3 +134,90 @@ npx hardhat flatten path/to/your/contract.sol
 2. [Find your deployed contract on the Kava explorer and follow the steps to verify](https://docs.blockscout.com/for-users/verifying-a-smart-contract). If your contract has constructor arguments, ensure that you provide them in the form. If you do not already have an ABI-encoded version of it, you can use this [online ABI encoding tool](https://docs.blockscout.com/for-users/verifying-a-smart-contract) to manually create it. Additional information about ABI-Encoded constructor arguments can be found on the [Blockscout documentation](https://docs.blockscout.com/for-users/abi-encoded-constructor-arguments).
 
 ## Via Hardhat Verification Plugin
+You can also verify directly from your Hardhat development environment. This requires the [hardhat-etherscan plugin](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan). The Kava explorer uses [BlockScout](https://github.com/blockscout/blockscout) which is compatible with the Hardhat Etherscan plugin.
+
+1. [Install the Hardhat Etherscan plugin](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan), ensuring that the version is ```v3.1.0``` or higher.
+2. Ensure your ```hardhat.config.js``` file includes the following ```etherscan``` configuration:
+
+```
+hardhat.config.js
+```
+```
+module.exports = {
+  networks: {
+    kava: {
+      url: 'https://evm.kava.io',
+    },
+  },
+  etherscan: {
+    apiKey: {
+      kava: "api key is not required by the Kava explorer, but can't be empty",
+    },
+    customChains: [
+      {
+        network: 'kava',
+        chainId: 2222,
+        urls: {
+          apiURL: 'https://explorer.kava.io/api',
+          browserURL: 'https://explorer.kava.io',
+        },
+      },
+    ],
+  },
+};
+```
+3. Verify that the custom network is configured correctly, by checking if kava is listed in the supported custom networks.
+
+```
+$ npx hardhat verify --list-networks
+
+Networks supported by hardhat-etherscan:
+
+...
+
+Custom networks added by you or by plugins:
+
+╔═════════╤══════════╗
+║ network │ chain id ║
+╟─────────┼──────────╢
+║ kava    │ 2222     ║
+╚═════════╧══════════╝
+```
+4. Verify the contract with ```npx hardhat verify```. This may take a few minutes. The following is an example of verifying an WKAVA contract.
+```
+$ npx hardhat verify --network kava 0x52A87b0703C65a4C30657e7badc808855711CdEc
+
+Nothing to compile
+Generating typings for: 0 artifacts in dir: typechain-types for target: ethers-v5
+Successfully generated 3 typings!
+Successfully generated 3 typings for external artifacts!
+Compiling 1 file with 0.8.9
+Successfully submitted source code for contract
+contracts/WKAVA.sol:WKAVA at 0x52A87b0703C65a4C30657e7badc808855711CdEc
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract WKAVA on Etherscan.
+https://explorer.kava.io/address/0x52A87b0703C65a4C30657e7badc808855711CdEc#code
+```
+## Troubleshooting
+Here are some common errors and things to look out for when verifying your contracts.
+
+**Bytecode does not match, please try again.**
+
+Ensure the following options are the exact same as what you deployed with, then try again.
+
+- Compiler version
+- Optimization runs
+- ABI-encoded constructur arguments
+
+**There was an error compiling your contract: Multiple SPDX license identifiers found in source file**
+
+Flattening your contracts may sometimes merge multiple dependent contracts also with SPX identifiers (e.g. // SPDX-License-Identifier: GPL-3.0).
+
+Remove all SPDX comments except one in your flattened file and try verifying again. Alternatively, use the hardhat verification plugin to preserve license identifiers
+
+## Resources
+- [Hardhat Verification Plugin](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan)
+- [BlockScout Documentation](https://docs.blockscout.com/)
+- [Online ABI encoding service](https://abi.hashex.org/)
+
