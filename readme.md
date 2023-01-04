@@ -124,3 +124,13 @@ If you want a cleaner CLI experience, you can add some script aliases to evm/pac
 
 # Contract Verification
 Once you have deployed your smart contracts, you can verify them on the [explorer](https://explorer.kava.io/). The following guide uses [hardhat](https://hardhat.org/).
+
+## Via Flattened Source Code
+
+1. Use the following command to get a flattened source code of your smart contract:
+```
+npx hardhat flatten path/to/your/contract.sol
+```
+2. [Find your deployed contract on the Kava explorer and follow the steps to verify](https://docs.blockscout.com/for-users/verifying-a-smart-contract). If your contract has constructor arguments, ensure that you provide them in the form. If you do not already have an ABI-encoded version of it, you can use this [online ABI encoding tool](https://docs.blockscout.com/for-users/verifying-a-smart-contract) to manually create it. Additional information about ABI-Encoded constructor arguments can be found on the [Blockscout documentation](https://docs.blockscout.com/for-users/abi-encoded-constructor-arguments).
+
+## Via Hardhat Verification Plugin
