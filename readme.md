@@ -29,3 +29,31 @@ kvtool enables developers to spin up a local Kava development environment. A doc
 kvtool testnet bootstrap --kava.configTemplate master 
 ```
 
+The ```faucet``` Ethereum account is funded with sufficient gas tokens to be used in EVM transactions such as deploying smart contracts. Configuration file ```hardhat.config.js``` contains field ```networks.local.accounts``` which holds an array of private keys, including the private key for ```faucet```. The private key was exported with:
+
+```
+# Add an alias to the dockerized kava blockchain
+alias dkava='docker exec -it generated_kavanode_1 kava'
+
+# Export private key for named account 'faucet'
+dkava keys unsafe-export-eth-key faucet --keyring-backend test
+```
+
+## Contract Deployment
+
+kvtool's ```evm``` directory contains an integrated Hardhat project for smart contract deployment and interaction.
+
+```
+# Navigate to the evm directory
+cd evm
+
+# Install dependencies
+yarn
+```
+
+A sample Solidity smart contract located at ```evm/contracts/token/Token.sol``` can be easily deployed with:
+
+```
+yarn token-deploy
+# TEST token deployed to: 0xff994EcA9074305D353E78a7159fE407537Cf87C
+```
