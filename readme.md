@@ -13,6 +13,12 @@ Kava is a lighting fast blockchain built with the Cosmos SDK that includes Kava 
 | Interoperability | Kava is connected to the 30 chains and \$60B+ of the Cosmos ecosystem via the IBC protocol.  |
 | Smart Contract Support | Kava EVM is fully compatible with Ethereum, offering an execution environment that empowers Solidity developers and their dApps to benefit from the scalability and security of the Kava Network.  |
 
+## Outline
+- [Development Tutorial](#development-tutorial)
+- [Contract Verification](#contract-verification)
+- [The Graph](#the-graph)
+- [Address Converter](#address-converter)
+
 
 # Connect to Metamask
 
@@ -276,3 +282,8 @@ A hosted The Graph node is available on Kava EVM Testnet.
 - GraphQL HTTP Server (Query subgraphs): https://the-graph.evm-alpha.kava.io
 
 The ```network``` name for Kava EVM Testnet is ```kava-evm-testnet```.
+
+
+# Address Converter
+
+To convert address: [Click Here](https://docs.kava.io/docs/ethereum/address_conversion)
