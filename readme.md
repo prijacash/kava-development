@@ -31,5 +31,7 @@ Kava provides tools for easily setting up a local Kava development environment f
 
 kvtool enables developers to spin up a local Kava development environment. A dockerized local testnet with ethermint EVM can be created with:
 
-``` kvtool testnet bootstrap --kava.configTemplate master ```
+```
+kvtool testnet bootstrap --kava.configTemplate master 
+```
 
