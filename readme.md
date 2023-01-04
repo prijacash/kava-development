@@ -57,3 +57,18 @@ A sample Solidity smart contract located at ```evm/contracts/token/Token.sol``` 
 yarn token-deploy
 # TEST token deployed to: 0xff994EcA9074305D353E78a7159fE407537Cf87C
 ```
+
+## Contract Interaction
+Basic contract interaction is possible through additional scripts with the full list available in ```evm/package.json```. Each yarn cmd is aliased to one of the Hardhat tasks found in ```hardhat.config.js```.
+
+```
+# Get the deployed TEST token's total supply
+yarn token-totalSupply --token [TOKEN_CONTRACT_ADDRESS]
+# Total Supply is 100000000
+```
+
+You can get information about any cmd including param options by using the ```--help``` flag, for example:
+
+```
+You can get information about any cmd including param options by using the --help flag, for example:
+```
