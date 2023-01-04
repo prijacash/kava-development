@@ -120,3 +120,7 @@ npx hardhat [YOUR_TASK_NAME] --network local
 ```
 
 If you want a cleaner CLI experience, you can add some script aliases to evm/package.json as seen in the ```scripts``` section.
+
+
+# Contract Verification
+Once you have deployed your smart contracts, you can verify them on the [explorer](https://explorer.kava.io/). The following guide uses [hardhat](https://hardhat.org/).
