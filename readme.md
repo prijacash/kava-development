@@ -221,3 +221,58 @@ Remove all SPDX comments except one in your flattened file and try verifying aga
 - [BlockScout Documentation](https://docs.blockscout.com/)
 - [Online ABI encoding service](https://abi.hashex.org/)
 
+# The Graph
+
+## Important Note
+
+The Graph nodes provided by Kava is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
+
+## Kava Mainnet
+
+A hosted [The Graph](https://thegraph.com/en/) node is available to use on Kava EVM.
+
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.kava.io
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.kava.io
+- Query Metrics: https://the-graph-metrics.kava.io/graphql
+
+[An example deployed subgraph](https://the-graph.evm-alpha.kava.io/subgraphs/name/Kava-Labs/v2-uniswap/graphql) is available for V2 Uniswap on Kava EVM Testnet.
+
+
+## Deploying Subgraphs
+
+### Install graph-cli
+
+https://github.com/graphprotocol/graph-cli#installation
+
+### Write your subgraph
+
+See https://thegraph.com/docs/en/developer/create-subgraph-hosted/.
+
+You can also use an example project like [v2-uniswap](https://github.com/Uniswap/v2-subgraph).
+
+### Upgrade the manifest
+
+Update the network properties in the ```subgraph.yaml``` manifest file. The network name for Kava EVM is ```kava-evm```.
+
+### Create your subgraph
+
+```
+graph create <subgraph-name> --node https://the-graph-admin.kava.io
+```
+
+### Deploy your subgraph
+```
+graph deploy <subgraph-name> --debug --ipfs https://api.thegraph.com/ipfs/ --node https://the-graph-admin.kava.io
+```
+
+Note that you can either use your own ipfs node here or https://api.thegraph.com/ipfs/.
+
+Once deployed, your graph should now be deployed and accessible via the GraphQL Server. It can be access at ```https://the-graph.kava.io/subgraphs/name/<subgraph-name>/graphql```.
+
+## Testnet
+A hosted The Graph node is available on Kava EVM Testnet.
+
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.evm-alpha.kava.io
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.evm-alpha.kava.io
+
+The ```network``` name for Kava EVM Testnet is ```kava-evm-testnet```.
